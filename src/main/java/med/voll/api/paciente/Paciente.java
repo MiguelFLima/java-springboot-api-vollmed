@@ -26,10 +26,13 @@ public class Paciente {
 
     private String cpf;
 
+    private boolean ativo;
+
     @Embedded
     private Endereco endereco;
 
     public Paciente(DadosDoPaciente dados) {
+        this.ativo = true;
         this.nome = dados.nome();
         this.email = dados.email();
         this.telefone = dados.telefone();
@@ -41,5 +44,9 @@ public class Paciente {
         if(dados.nome() != null) this.nome = dados.nome();
         if(dados.telefone() != null) this.email = dados.telefone();
         if(dados.endereco() != null) this.endereco.atualizarInformacoes(dados.endereco());
+    }
+
+    public void softDelete() {
+        this.ativo = false;
     }
 }
